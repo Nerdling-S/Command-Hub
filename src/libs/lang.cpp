@@ -61,7 +61,7 @@ bool isModifier(int code) {
 std::vector<int> modify(std::vector<int> codes) {
     std::vector<int> new_codes;
     for (auto it = codes.begin(); it != codes.end(); ++it) {
-        if (isModifier(*it) && argIts.empty()) {
+        if (isModifier(*it)) {
             new_codes.push_back((*it) * *(++it));
         } else {
             new_codes.push_back(*it);
@@ -85,7 +85,7 @@ void order(std::vector<int> &codes, std::vector<Word> wordOrder) {
 std::vector<int> procInput(std::string input, std::vector<Word> wordList) {
     // TODO procInput
     std::vector<int> codes = toCodes(format(input), wordList);
-    codes = modify(codes);
+    //codes = modify(codes);
     order(codes, wordList);
     return codes;
 }
