@@ -1,4 +1,4 @@
-CXXFLAGS = -Wall -g
+CXXFLAGS = -Wall -g -std=c++17
 LDLIBS = -lncurses
 OBJ := $(patsubst %.cpp,obj/%.o,$(wildcard src/*.cpp))
 LIB := $(patsubst %.cpp,obj/libs/%.o,$(wildcard src/libs/*.cpp))
