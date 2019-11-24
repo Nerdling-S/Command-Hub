@@ -53,7 +53,7 @@ std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordLi
 
 // Compare code with list of known modifiers
 bool isModifier(int code) {
-    std::set<int> mods {NOT};
+    std::set<int> mods {VLC};
     return mods.count(code);
 }
 

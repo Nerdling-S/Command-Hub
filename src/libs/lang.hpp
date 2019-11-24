@@ -6,7 +6,7 @@
 #include <vector>
 
 enum {
-    NOT = -1,
+    VLC = -1,
     QUIT = 100
 };
 
