@@ -6,13 +6,14 @@
 #include <vector>
 
 enum {
-    VLC = -1,
+    VLC = -2,
+    NOT = -1,
     QUIT = 100
 };
 
 std::vector<std::vector<std::string>::iterator> argIts;
 
-std::vector<Word> initWords();
+std::vector<Word> initWords(std::string);
 
 std::vector<std::string> format(std::string);
 

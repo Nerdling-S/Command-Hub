@@ -3,10 +3,10 @@
 #include <unordered_map>
 
 // Initialise vector of Words from file:thesaurus.data
-std::vector<Word> initWords() {
+std::vector<Word> initWords(std::string file) {
     std::vector<Word> words;
     // Decode thesaurus.data -> pairs of codes and string-sets
-    std::vector<std::pair<int, std::set<std::string>>> thesaurus = decode(fileInput("thesaurus.data"));
+    std::vector<std::pair<int, std::set<std::string>>> thesaurus = decode(fileInput(file));
     for (auto it = thesaurus.begin(); it != thesaurus.end(); ++it) {
         // Add a word with a code and list of synonyms
         words.push_back(Word(it->first, it->second));
