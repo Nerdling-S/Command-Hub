@@ -10,7 +10,7 @@ enum {
     QUIT = 100
 };
 
-std::vector<std::string> args;
+std::vector<std::vector<std::string>::iterator> argIts;
 
 std::vector<Word> initWords();
 
