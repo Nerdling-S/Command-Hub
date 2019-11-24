@@ -1,4 +1,5 @@
 #include "libs/lang.hpp"
+#include "commands.hpp"
 #include <string>
 #include <ncurses.h>
 #include <vector>
