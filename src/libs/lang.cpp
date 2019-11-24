@@ -40,6 +40,9 @@ std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordLi
         for (auto jt = wordList.begin(); jt != wordList.end(); ++jt) {
             int code = jt->is(*it);
             if (code != 0) {
+                if (isModifier(code)) {
+                    args.push_back(*++it);
+                }
                 codes.push_back(code);
                 break;
             }
@@ -58,7 +61,7 @@ bool isModifier(int code) {
 std::vector<int> modify(std::vector<int> codes) {
     std::vector<int> new_codes;
     for (auto it = codes.begin(); it != codes.end(); ++it) {
-        if (isModifier(*it)) {
+        if (isModifier(*it) && args.empty()) {
             new_codes.push_back((*it) * *(++it));
         } else {
             new_codes.push_back(*it);

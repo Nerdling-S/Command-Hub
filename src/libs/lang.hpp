@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utility.hpp"
+#include "langUtils.hpp"
 #include "word.hpp"
 #include <string>
 #include <vector>
@@ -9,6 +9,8 @@ enum {
     NOT = -1,
     QUIT = 100
 };
+
+std::vector<std::string> args;
 
 std::vector<Word> initWords();
 
