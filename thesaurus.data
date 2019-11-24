@@ -1,2 +1,3 @@
--1:watch,listen
+-2:watch,listen
+-1:not,don't
 100:quit,leave,goodbye
