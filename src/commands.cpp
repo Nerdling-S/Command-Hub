@@ -5,7 +5,7 @@
 namespace filesystem = std::experimental::filesystem;
 
 struct {
-    std::string vlc = "\"C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe\"";
+    std::string vlc = "C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe";
 } commands;
 
 struct {
@@ -37,5 +37,7 @@ void vlc(std::vector<std::string> text, std::vector<std::string>::iterator it) {
             highest = it->first;
         }
     }
-    // Call cmd.exe with vlc and highest
+
+    execl("/mnt/c/Windows/system32/cmd.exe", "cmd.exe",
+        "/C", commands.vlc, highest, (char *)NULL);
 }
