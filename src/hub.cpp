@@ -25,13 +25,20 @@ int main(int argc, const char** argv) {
         clear();
         printw("Greetings, what would you like to do?");
         std::string input = get_input();
-        std::vector<int> inputCodes = procInput(input, thesaurus);
+        std::vector<std::vector<std::string>::iterator> argPos;
+        std::vector<int> inputCodes = procInput(input, thesaurus, argPos);
+        int i = 0;
         for (auto it = inputCodes.begin(); it != inputCodes.end(); ++it) {
             switch (*it)
             {
-            case QUIT:
+            case QUIT: {
                 exit(EXIT_SUCCESS);
                 break;
+            }
+
+            case VLC: {
+                vlc(format(input), argPos[0]);
+            }
             
             default:
                 break;

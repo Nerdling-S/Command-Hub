@@ -33,7 +33,7 @@ std::vector<std::string> format(std::string input) {
 }
 
 // Convert a phrase to a vector of codes
-std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordList) {
+std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordList, std::vector<std::vector<std::string>::iterator> &argIts) {
     // meaningful words -> codes, 'useless' words discarded
     std::vector<int> codes;
     for (auto it = text.begin(); it != text.end(); ++it) {
@@ -82,8 +82,8 @@ void order(std::vector<int> &codes, std::vector<Word> wordOrder) {
 }
 
 // Process input into a vector of command-codes
-std::vector<int> procInput(std::string input, std::vector<Word> wordList) {
-    std::vector<int> codes = toCodes(format(input), wordList);
+std::vector<int> procInput(std::string input, std::vector<Word> wordList, std::vector<std::vector<std::string>::iterator> &argIts) {
+    std::vector<int> codes = toCodes(format(input), wordList, argIts);
     //codes = modify(codes);
     order(codes, wordList);
     return codes;
