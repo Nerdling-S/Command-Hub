@@ -15,6 +15,8 @@ std::vector<Word> initWords(std::string);
 
 std::vector<std::string> format(std::string);
 
+bool takesArgs(int);
+
 std::vector<int> toCodes(std::vector<std::string>, std::vector<Word>, std::vector<std::vector<std::string>::iterator>);
 
 bool isModifier(int);

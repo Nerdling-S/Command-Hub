@@ -32,6 +32,14 @@ std::vector<std::string> format(std::string input) {
     return words;
 }
 
+
+// Compare code with list commands that take arguments
+bool takesArgs(int code) {
+    std::set<int> argTakers {VLC};
+    return argTakers.count(code);
+}
+
+
 // Convert a phrase to a vector of codes
 std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordList, std::vector<std::vector<std::string>::iterator> &argIts) {
     // meaningful words -> codes, 'useless' words discarded
@@ -40,7 +48,7 @@ std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordLi
         for (auto jt = wordList.begin(); jt != wordList.end(); ++jt) {
             int code = jt->is(*it);
             if (code != 0) {
-                if (isModifier(code)) {
+                if (takesArgs(code)) {
                     argIts.push_back(it);
                 }
                 codes.push_back(code);
@@ -53,7 +61,7 @@ std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordLi
 
 // Compare code with list of known modifiers
 bool isModifier(int code) {
-    std::set<int> mods {VLC};
+    std::set<int> mods {NOT};
     return mods.count(code);
 }
 
@@ -84,7 +92,7 @@ void order(std::vector<int> &codes, std::vector<Word> wordOrder) {
 // Process input into a vector of command-codes
 std::vector<int> procInput(std::string input, std::vector<Word> wordList, std::vector<std::vector<std::string>::iterator> &argIts) {
     std::vector<int> codes = toCodes(format(input), wordList, argIts);
-    //codes = modify(codes);
+    codes = modify(codes);
     order(codes, wordList);
     return codes;
 }
