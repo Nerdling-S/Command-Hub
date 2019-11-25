@@ -83,7 +83,6 @@ void order(std::vector<int> &codes, std::vector<Word> wordOrder) {
 
 // Process input into a vector of command-codes
 std::vector<int> procInput(std::string input, std::vector<Word> wordList) {
-    // TODO procInput
     std::vector<int> codes = toCodes(format(input), wordList);
     //codes = modify(codes);
     order(codes, wordList);
