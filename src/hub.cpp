@@ -18,12 +18,12 @@ std::string get_input() {
 }
 
 int main(int argc, const char** argv) {
-    std::vector<Word> thesaurus = initWords("../thesaurus.data");
+    std::vector<Word> thesaurus = initWords("thesaurus.data");
     initscr();
     cbreak();
     while (true) {
         clear();
-        printw("Greetings, what would you like to do?");
+        printw("Greetings, what would you like to do?\n");
         std::string input = get_input();
         std::vector<std::string>::iterator argPos;
         std::vector<int> inputCodes = procInput(input, thesaurus, argPos);
