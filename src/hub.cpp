@@ -27,7 +27,6 @@ int main(int argc, const char** argv) {
         std::string input = get_input();
         std::vector<std::vector<std::string>::iterator> argPos;
         std::vector<int> inputCodes = procInput(input, thesaurus, argPos);
-        int i = 0;
         for (auto it = inputCodes.begin(); it != inputCodes.end(); ++it) {
             switch (*it)
             {
