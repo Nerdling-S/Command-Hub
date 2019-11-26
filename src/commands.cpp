@@ -1,8 +1,8 @@
 #include "commands.hpp"
-#include <experimental/filesystem>
+#include <filesystem>
 #include <unistd.h>
 #include <unordered_map>
-namespace filesystem = std::experimental::filesystem;
+namespace filesystem = std::filesystem;
 
 struct {
     std::string vlc = "C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe";
@@ -23,7 +23,7 @@ void vlc(std::vector<std::string> text, std::vector<std::string>::iterator it) {
     for (auto& p : filesystem::recursive_directory_iterator(folders.vids)) {
         for (auto it = words.begin(); it != words.end(); ++it) {
             if (p.path().generic_string().find(*it) != std::string::npos) {
-                std::pair<std::unordered_map<std::string, int>::iterator,bool> success = file_count.insert(std::make_pair(p.path().generic_string, 1));
+                std::pair<std::unordered_map<std::string, int>::iterator,bool> success = file_count.insert(std::make_pair(p.path().generic_string(), 1));
                 if (!success.second) {
                     success.first->second++;
                 }
