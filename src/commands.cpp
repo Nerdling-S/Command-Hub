@@ -1,4 +1,5 @@
 #include "commands.hpp"
+#include <algorithm>
 #include <filesystem>
 #include <unistd.h>
 #include <unordered_map>
@@ -22,7 +23,11 @@ void vlc(std::vector<std::string> text, std::vector<std::string>::iterator it) {
     std::unordered_map<std::string, int> file_count;
     for (auto& p : filesystem::recursive_directory_iterator(folders.vids)) {
         for (auto it = words.begin(); it != words.end(); ++it) {
-            if (p.path().generic_string().find(*it) != std::string::npos) {
+            std::string lowerPath = p.path().generic_string();
+            // Copied: converts lowerPath to lowercase
+            std::transform(lowerPath.begin(), lowerPath.end(), lowerPath.begin(),
+                [](unsigned char c){ return std::tolower(c); });
+            if (lowerPath.find(*it) != std::string::npos) {
                 std::pair<std::unordered_map<std::string, int>::iterator,bool> success = file_count.insert(std::make_pair(p.path().generic_string(), 1));
                 if (!success.second) {
                     success.first->second++;

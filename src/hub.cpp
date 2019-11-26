@@ -10,7 +10,7 @@ std::string get_input() {
     echo();
     int ch = getch();
     while (ch != '\n') {
-        input += ch;
+        input += std::tolower(ch);
         ch = getch();
     }
     cbreak();
