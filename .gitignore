@@ -33,3 +33,6 @@
 
 # Vscode things
 .vscode/*
+
+# Executable
+command-hub
