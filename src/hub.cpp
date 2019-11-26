@@ -25,7 +25,7 @@ int main(int argc, const char** argv) {
         clear();
         printw("Greetings, what would you like to do?");
         std::string input = get_input();
-        std::vector<std::vector<std::string>::iterator> argPos;
+        std::vector<std::string>::iterator argPos;
         std::vector<int> inputCodes = procInput(input, thesaurus, argPos);
         for (auto it = inputCodes.begin(); it != inputCodes.end(); ++it) {
             switch (*it)
@@ -36,7 +36,7 @@ int main(int argc, const char** argv) {
             }
 
             case VLC: {
-                vlc(format(input), argPos[0]);
+                vlc(format(input), argPos);
             }
             
             default:

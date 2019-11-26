@@ -41,8 +41,7 @@ bool takesArgs(int code) {
 
 
 // Convert a phrase to a vector of codes
-template <class RandomAccessIterator>
-std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordList, RandomAccessIterator &argIts) {
+std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordList, std::vector<std::string>::iterator &argIt) {
     // meaningful words -> codes, 'useless' words discarded
     std::vector<int> codes;
     for (auto it = text.begin(); it != text.end(); ++it) {
@@ -50,7 +49,7 @@ std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordLi
             int code = jt->is(*it);
             if (code != 0) {
                 if (takesArgs(code)) {
-                    argIts.push_back(it);
+                    argIt = it;
                 }
                 codes.push_back(code);
                 break;
@@ -91,8 +90,7 @@ void order(std::vector<int> &codes, std::vector<Word> wordOrder) {
 }
 
 // Process input into a vector of command-codes
-template <class RandomAccessIterator>
-std::vector<int> procInput(std::string input, std::vector<Word> wordList, RandomAccessIterator &argIts) {
+std::vector<int> procInput(std::string input, std::vector<Word> wordList, std::vector<std::string>::iterator argIts) {
     std::vector<int> codes = toCodes(format(input), wordList, argIts);
     codes = modify(codes);
     order(codes, wordList);

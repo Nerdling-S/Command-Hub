@@ -17,8 +17,7 @@ std::vector<std::string> format(std::string);
 
 bool takesArgs(int);
 
-template <class RandomAccessIterator>
-std::vector<int> toCodes(std::vector<std::string>, std::vector<Word>, RandomAccessIterator);
+std::vector<int> toCodes(std::vector<std::string>, std::vector<Word>, std::vector<std::string>::iterator&);
 
 bool isModifier(int);
 
@@ -26,5 +25,4 @@ std::vector<int> modify(std::vector<int>);
 
 void order(std::vector<int>&, std::vector<Word>);
 
-template <class RandomAccessIterator>
-std::vector<int> procInput(std::string, std::vector<Word>, RandomAccessIterator);
+std::vector<int> procInput(std::string, std::vector<Word>, std::vector<std::string>::iterator);
