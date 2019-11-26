@@ -15,8 +15,10 @@ struct {
 
 void vlc(std::vector<std::string> text, std::vector<std::string>::iterator it) {
     std::vector<std::string> words;
+    // 5 after it, or less. Essentially SegFault protection
+    auto n = it+5 != text.end() ? it+5 : it+4 != text.end() ? it+4 : it+3 != text.end() ? it+3 : it+2 != text.end() ? it+2 : it+1;
     // Possible arguments
-    for (; it != it+4; ++it) {
+    for (; it != n; ++it) {
         words.push_back(*it);
     }
     // Find files that contain an argument
