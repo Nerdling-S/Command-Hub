@@ -34,11 +34,9 @@ int main(int argc, const char** argv) {
                 exit(EXIT_SUCCESS);
                 break;
             }
-
             case VLC: {
                 vlc(format(input), argPos);
             }
-            
             default:
                 break;
             }
