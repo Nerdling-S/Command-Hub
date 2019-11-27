@@ -50,7 +50,7 @@ struct {
 } greeting;
 
 int main(int argc, const char** argv) {
-    std::vector<Word> thesaurus = initWords("thesauri/opening.thsrs");
+    std::vector<Word> thesaurus = initWords("/mnt/c/Users/Seb/Desktop/Programming/Cpp/projects/Command-Hub/thesauri/opening.thsrs");
     initscr();
     cbreak();
     std::string msg = greeting.greetFirst();
@@ -80,7 +80,7 @@ int main(int argc, const char** argv) {
                 break;
             }
         }
-        thesaurus = initWords("thesauri/second.thsrs");
+        thesaurus = initWords("/mnt/c/Users/Seb/Desktop/Programming/Cpp/projects/Command-Hub/thesauri/second.thsrs");
         msg = greeting.greetNext();
     }
 }
