@@ -14,7 +14,7 @@ struct {
 } folders;
 
 std::string windowsify(std::string path) {
-    
+    return "C:" + path.substr(7);
 }
 
 void vlc(std::vector<std::string> text, int argI) {

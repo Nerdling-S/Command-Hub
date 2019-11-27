@@ -3,4 +3,6 @@
 #include <string>
 #include <vector>
 
-void vlc(std::vector<std::string>, std::vector<std::string>::iterator);
+std::string windowsify(std::string);
+
+void vlc(std::vector<std::string>, int);
