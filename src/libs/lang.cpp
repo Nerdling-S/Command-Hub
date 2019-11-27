@@ -49,7 +49,7 @@ std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordLi
             int code = jt->is(text[i]);
             if (code != 0) {
                 if (takesArgs(code)) {
-                    argI = i;
+                    argI = i+1;
                 }
                 codes.push_back(code);
                 break;
