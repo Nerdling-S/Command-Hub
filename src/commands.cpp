@@ -21,10 +21,8 @@ std::string windowsify(std::string path) {
 void vlc(std::vector<std::string> text, int argI) {
     std::vector<std::string> words;
     size_t i = argI;
-    // 5 after it, or less. Essentially SegFault protection
-    size_t n = i+5 < text.size() ? 5 : i+4 < text.size() ? 4 : i+3 < text.size() ? 3 : i+2 < text.size() ? 2 : 1;
     // Possible arguments
-    for (; i < n+1; i++) {
+    for (; i < text.size(); i++) {
         words.push_back(text[i]);
     }
     // Find files that contain an argument
