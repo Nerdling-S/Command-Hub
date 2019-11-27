@@ -12,6 +12,7 @@ struct {
 
 struct {
     filesystem::path vids = "/mnt/c/Users/Seb/Desktop/Vids/";
+    filesystem::path music = "/mnt/c/Users/Seb/Music/";
 } folders;
 
 std::string windowsify(std::string path) {
@@ -27,6 +28,7 @@ void vlc(std::vector<std::string> text, int argI) {
     }
     // Find files that contain an argument
     std::unordered_map<std::string, int> file_count;
+    // In Vids
     for (auto& p : filesystem::recursive_directory_iterator(folders.vids)) {
         for (auto it = words.begin(); it != words.end(); ++it) {
             std::string lowerPath = p.path().generic_string();
@@ -41,7 +43,23 @@ void vlc(std::vector<std::string> text, int argI) {
                 }
             }
         }
-    };
+    }
+    // In Music
+    for (auto& p : filesystem::recursive_directory_iterator(folders.music)) {
+        for (auto it = words.begin(); it != words.end(); ++it) {
+            std::string lowerPath = p.path().generic_string();
+            // Copied: converts lowerPath to lowercase
+            std::transform(lowerPath.begin(), lowerPath.end(), lowerPath.begin(),
+                [](unsigned char c){ return std::tolower(c); });
+            if (lowerPath.find(*it) != std::string::npos) {
+                std::string windowsString = windowsify(p.path().generic_string());
+                std::pair<std::unordered_map<std::string, int>::iterator,bool> success = file_count.insert(std::make_pair(windowsString, 1));
+                if (!success.second) {
+                    success.first->second++;
+                }
+            }
+        }
+    }
     // Find file with highest hits
     std::string highest = file_count.begin()->first;
     for (auto it = file_count.begin(); it != file_count.end(); ++it) {
