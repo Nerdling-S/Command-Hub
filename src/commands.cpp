@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <unistd.h>
 #include <unordered_map>
+#include <wait.h>
 namespace filesystem = std::filesystem;
 
 struct {
@@ -50,5 +51,20 @@ void vlc(std::vector<std::string> text, int argI) {
             highest = it->first;
         }
     }
-    execl("/bin/sh", "sh", "-c", (commands.vlc + " " + highest).c_str(), (char*)NULL);
+    runCommand(commands.vlc + " " + highest);
+}
+
+void runCommand(std::string command) {
+    // execl("/bin/sh", "sh", "-c",
+    pid_t cpid = fork();
+    switch (cpid)
+    {
+    case -1: perror("fork");
+        break;
+    
+    case 0: execl("/bin/sh", "sh", "-c", command.c_str(), (char*)NULL);
+    
+    default: waitpid(cpid, NULL, 0);
+        break;
+    }
 }
