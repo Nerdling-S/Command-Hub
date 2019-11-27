@@ -6,7 +6,7 @@
 namespace filesystem = std::filesystem;
 
 struct {
-    std::string vlc = "C:/Program Files (x86)/VideoLAN/VLC/vlc.exe";
+    std::string vlc = "/mnt/c/Program\\ Files\\ \\(x86\\)/VideoLAN/VLC/vlc.exe";
 } commands;
 
 struct {
@@ -14,7 +14,7 @@ struct {
 } folders;
 
 std::string windowsify(std::string path) {
-    return "C:" + path.substr(7);
+    return "file:///C:" + path.substr(6);
 }
 
 void vlc(std::vector<std::string> text, int argI) {
@@ -23,7 +23,7 @@ void vlc(std::vector<std::string> text, int argI) {
     // 5 after it, or less. Essentially SegFault protection
     size_t n = i+5 < text.size() ? 5 : i+4 < text.size() ? 4 : i+3 < text.size() ? 3 : i+2 < text.size() ? 2 : 1;
     // Possible arguments
-    for (; i != n; i++) {
+    for (; i < n+1; i++) {
         words.push_back(text[i]);
     }
     // Find files that contain an argument
@@ -50,7 +50,5 @@ void vlc(std::vector<std::string> text, int argI) {
             highest = it->first;
         }
     }
-
-    execl("/mnt/c/Windows/system32/cmd.exe", "cmd.exe",
-        "/C", commands.vlc, highest, (char *)NULL);
+    execl("/bin/sh", "sh", "-c", (commands.vlc + " " + highest).c_str(), (char*)NULL);
 }
