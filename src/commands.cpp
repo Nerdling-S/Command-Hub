@@ -67,7 +67,7 @@ void vlc(std::vector<std::string> text, int argI) {
             highest = it->first;
         }
     }
-    runCommand(commands.vlc + " " + highest);
+    runCommand(commands.vlc + " \"" + highest + "\"");
 }
 
 void runCommand(std::string command) {
