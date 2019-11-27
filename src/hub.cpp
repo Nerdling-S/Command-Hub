@@ -21,9 +21,10 @@ int main(int argc, const char** argv) {
     std::vector<Word> thesaurus = initWords("thesaurus.data");
     initscr();
     cbreak();
+    std::string msg = "Greetings, what would you like to do?\n";
     while (true) {
         clear();
-        printw("Greetings, what would you like to do?\n");
+        printw(msg.c_str());
         std::string input = get_input();
         int argPos;
         std::vector<int> inputCodes = procInput(input, thesaurus, argPos);
@@ -42,5 +43,6 @@ int main(int argc, const char** argv) {
                 break;
             }
         }
+        msg = "Anything else?";
     }
 }
