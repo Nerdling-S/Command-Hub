@@ -18,7 +18,7 @@ std::string get_input() {
 }
 
 int main(int argc, const char** argv) {
-    std::vector<Word> thesaurus = initWords("thesaurus.data");
+    std::vector<Word> thesaurus = initWords("thesauri/opening.thsrs");
     initscr();
     cbreak();
     std::string msg = "Greetings, what would you like to do?\n";
@@ -43,6 +43,7 @@ int main(int argc, const char** argv) {
                 break;
             }
         }
-        msg = "Anything else?";
+        thesaurus = initWords("thesauri/second.thsrs");
+        msg = "Anything else?\n";
     }
 }
