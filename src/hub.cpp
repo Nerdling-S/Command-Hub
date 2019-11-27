@@ -25,7 +25,8 @@ int main(int argc, const char** argv) {
         clear();
         printw("Greetings, what would you like to do?\n");
         std::string input = get_input();
-        std::vector<std::string>::iterator argPos;
+        // TODO argPos to int index;
+        int argPos;
         std::vector<int> inputCodes = procInput(input, thesaurus, argPos);
         for (auto it = inputCodes.begin(); it != inputCodes.end(); ++it) {
             switch (*it)

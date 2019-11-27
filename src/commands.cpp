@@ -6,20 +6,25 @@
 namespace filesystem = std::filesystem;
 
 struct {
-    std::string vlc = "C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe";
+    std::string vlc = "C:/Program Files (x86)/VideoLAN/VLC/vlc.exe";
 } commands;
 
 struct {
-    filesystem::path vids = "C:\\Users\\Seb\\Desktop\\Vids\\";
+    filesystem::path vids = "/mnt/c/Users/Seb/Desktop/Vids/";
 } folders;
 
-void vlc(std::vector<std::string> text, std::vector<std::string>::iterator it) {
+std::string windowsify(std::string path) {
+    
+}
+
+void vlc(std::vector<std::string> text, int argI) {
     std::vector<std::string> words;
+    size_t i = argI;
     // 5 after it, or less. Essentially SegFault protection
-    auto n = it+5 != text.end() ? it+5 : it+4 != text.end() ? it+4 : it+3 != text.end() ? it+3 : it+2 != text.end() ? it+2 : it+1;
+    size_t n = i+5 < text.size() ? 5 : i+4 < text.size() ? 4 : i+3 < text.size() ? 3 : i+2 < text.size() ? 2 : 1;
     // Possible arguments
-    for (; it != n; ++it) {
-        words.push_back(*it);
+    for (; i != n; i++) {
+        words.push_back(text[i]);
     }
     // Find files that contain an argument
     std::unordered_map<std::string, int> file_count;
@@ -30,7 +35,8 @@ void vlc(std::vector<std::string> text, std::vector<std::string>::iterator it) {
             std::transform(lowerPath.begin(), lowerPath.end(), lowerPath.begin(),
                 [](unsigned char c){ return std::tolower(c); });
             if (lowerPath.find(*it) != std::string::npos) {
-                std::pair<std::unordered_map<std::string, int>::iterator,bool> success = file_count.insert(std::make_pair(p.path().generic_string(), 1));
+                std::string windowsString = windowsify(p.path().generic_string());
+                std::pair<std::unordered_map<std::string, int>::iterator,bool> success = file_count.insert(std::make_pair(windowsString, 1));
                 if (!success.second) {
                     success.first->second++;
                 }

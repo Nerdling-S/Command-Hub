@@ -17,7 +17,7 @@ std::vector<std::string> format(std::string);
 
 bool takesArgs(int);
 
-std::vector<int> toCodes(std::vector<std::string>, std::vector<Word>, std::vector<std::string>::iterator&);
+std::vector<int> toCodes(std::vector<std::string>, std::vector<Word>, int&);
 
 bool isModifier(int);
 
@@ -25,4 +25,4 @@ std::vector<int> modify(std::vector<int>);
 
 void order(std::vector<int>&, std::vector<Word>);
 
-std::vector<int> procInput(std::string, std::vector<Word>, std::vector<std::string>::iterator);
+std::vector<int> procInput(std::string, std::vector<Word>, int&);

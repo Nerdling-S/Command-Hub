@@ -41,15 +41,15 @@ bool takesArgs(int code) {
 
 
 // Convert a phrase to a vector of codes
-std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordList, std::vector<std::string>::iterator &argIt) {
+std::vector<int> toCodes(std::vector<std::string> text, std::vector<Word> wordList, int &argI) {
     // meaningful words -> codes, 'useless' words discarded
     std::vector<int> codes;
-    for (auto it = text.begin(); it != text.end(); ++it) {
+    for (unsigned int i = 0; i < text.size(); i++) {
         for (auto jt = wordList.begin(); jt != wordList.end(); ++jt) {
-            int code = jt->is(*it);
+            int code = jt->is(text[i]);
             if (code != 0) {
                 if (takesArgs(code)) {
-                    argIt = it;
+                    argI = i;
                 }
                 codes.push_back(code);
                 break;
@@ -90,8 +90,8 @@ void order(std::vector<int> &codes, std::vector<Word> wordOrder) {
 }
 
 // Process input into a vector of command-codes
-std::vector<int> procInput(std::string input, std::vector<Word> wordList, std::vector<std::string>::iterator argIts) {
-    std::vector<int> codes = toCodes(format(input), wordList, argIts);
+std::vector<int> procInput(std::string input, std::vector<Word> wordList, int &argI) {
+    std::vector<int> codes = toCodes(format(input), wordList, argI);
     codes = modify(codes);
     order(codes, wordList);
     return codes;
